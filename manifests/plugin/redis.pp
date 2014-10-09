@@ -11,6 +11,12 @@ class collectd::plugin::redis (
 
   validate_hash($nodes)
 
+  if $::osfamily == 'Redhat' {
+    package { 'collectd-redis':
+      ensure => installed
+    }
+  }
+
   collectd::plugin {'redis':
     ensure  => $ensure,
     content => template('collectd/plugin/redis.conf.erb'),
