@@ -8,6 +8,12 @@ class collectd::plugin::disk (
   validate_array($disks)
   validate_bool($ignoreselected)
 
+  if $::osfamily == 'Redhat' {
+    package { 'collectd-disk':
+      ensure => installed
+    }
+  }
+
   collectd::plugin {'disk':
     ensure  => $ensure,
     content => template('collectd/plugin/disk.conf.erb'),
