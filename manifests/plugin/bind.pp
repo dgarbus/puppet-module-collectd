@@ -10,6 +10,7 @@ class collectd::plugin::bind (
   $serverstats    = true,
   $zonemaintstats = true,
   $views          = [],
+  $interval       = undef,
 ) {
 
   validate_bool(
@@ -30,7 +31,8 @@ class collectd::plugin::bind (
   }
 
   collectd::plugin {'bind':
-    ensure  => $ensure,
-    content => template('collectd/plugin/bind.conf.erb'),
+    ensure   => $ensure,
+    content  => template('collectd/plugin/bind.conf.erb'),
+    interval => $interval,
   }
 }

@@ -58,7 +58,9 @@ documentation for each plugin for configurable attributes.
 * `amqp`  (see [collectd::plugin::amqp](#class-collectdpluginamqp) below)
 * `apache`  (see [collectd::plugin::apache](#class-collectdpluginapache) below)
 * `bind`  (see [collectd::plugin::bind](#class-collectdpluginbind) below)
+* `conntrack`  (see [collectd::plugin::conntrack](#class-conntrack) below)
 * `cpu`  (see [collectd::plugin::cpu](#class-collectdplugincpu) below)
+* `cpufreq`  (see [collectd::plugin::cpufreq](#class-collectdplugincpufreq) below)
 * `csv`  (see [collectd::plugin::csv](#class-collectdplugincsv) below)
 * `curl` (see [collectd::plugin::curl](#class-collectdplugincurl) below)
 * `curl_json` (see [collectd::plugin::curl_json](#class-collectdplugincurl_json) below)
@@ -105,6 +107,7 @@ documentation for each plugin for configurable attributes.
 * `write_http` (see [collectd::plugin::write_http](#class-collectdpluginwrite_http) below)
 * `write_network` (see [collectd::plugin::write_network](#class-collectdpluginwrite_network) below)
 * `write_riemann` (see [collectd::plugin::write_riemann](#class-collectdpluginwrite_riemann) below)
+* `zfs_arc` (see [collectd::plugin::zfs_arc](#class-collectdpluginzfs_arc) below)
 
 ####Class: `collectd::plugin::amqp`
 
@@ -140,10 +143,27 @@ class { 'collectd::plugin::bind':
 }
 ```
 
+####Class: `collectd::plugin::conntrack`
+
+```puppet
+class { 'collectd::plugin::conntrack':
+}
+
+
+```
+
 ####Class: `collectd::plugin::cpu`
 
 ```puppet
 class { 'collectd::plugin::cpu':
+}
+
+
+```
+####Class: `collectd::plugin::cpufreq`
+
+```puppet
+class { 'collectd::plugin::cpufreq':
 }
 ```
 
@@ -231,7 +251,7 @@ class { 'collectd::plugin::disk':
 ####Class: `collectd::plugin::entropy`
 
 ```puppet
-collectd::plugin::entropy {
+class { 'collectd::plugin::entropy':
 }
 ```
 
@@ -248,6 +268,31 @@ collectd::plugin::exec {
 
 ####Class: `collectd::plugin::filecount`
 
+```puppet
+collectd::plugin::filecount::directory {'foodir':
+  path          => '/path/to/dir',
+  pattern       => '*.conf',
+  mtime         => '-5m',
+  recursive     => true,
+  includehidden => false
+}
+
+```
+You can also configure this plugin with a parameterized class:
+```puppet
+class { 'collectd::plugin::filecount':
+  directories => {
+    'foodir' => {
+      'path'          => '/path/to/dir',
+      'pattern'       => '*.conf',
+      'mtime'         => '-5m',
+      'recursive'     => true,
+      'includehidden' => false
+      },
+  },
+}
+```
+For backwards compatibility:
 ```puppet
 class { 'collectd::plugin::filecount':
   directories => {
@@ -756,7 +801,7 @@ class { 'collectd::plugin::vmem':
 
 ```puppet
 class { 'collectd::plugin::write_graphite':
-  graphitehost => 'graphite.examle.org',
+  graphitehost => 'graphite.example.org',
 }
 ```
 
@@ -790,6 +835,14 @@ class { 'collectd::plugin::write_network':
 class { 'collectd::plugin::write_riemann':
   riemann_host => 'riemann.example.org',
   riemann_port => 5555,
+}
+```
+
+
+####Class: `collectd::plugin::zfs_arc`
+
+```puppet
+class { 'collectd::plugin::zfs_arc':
 }
 ```
 
