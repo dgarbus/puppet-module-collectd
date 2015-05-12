@@ -20,6 +20,10 @@ define collectd::plugin::python (
   }
   # End deprecation
 
+  if $::osfamily == 'Redhat' {
+    ensure_packages('collectd-python')
+  }
+
   file {
     "${name}.load":
       ensure  => $ensure,
