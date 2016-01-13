@@ -1,7 +1,6 @@
 require 'puppetlabs_spec_helper/module_spec_helper'
 
 RSpec.configure do |c|
-  c.treat_symbols_as_metadata_keys_with_true_values = true
   c.include PuppetlabsSpec::Files
 
   c.before :each do
@@ -13,11 +12,9 @@ RSpec.configure do |c|
 
     # Store any environment variables away to be restored later
     @old_env = {}
-    ENV.each_key {|k| @old_env[k] = ENV[k]}
+    ENV.each_key { |k| @old_env[k] = ENV[k] }
 
-    if ENV['STRICT_VARIABLES'] == 'yes'
-      Puppet.settings[:strict_variables]=true
-    end
+    Puppet.settings[:strict_variables] = true if ENV['STRICT_VARIABLES'] == 'yes'
   end
   c.after :each do
     PuppetlabsSpec::Files.cleanup

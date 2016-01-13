@@ -2,10 +2,10 @@
   DaemonAddress "<%= @daemonaddress %>"
   DataDir "<%= @datadir %>"
 <% unless @createfiles.nil? -%>
-  CreateFiles "<%= @createfiles %>"
+  CreateFiles <%= @createfiles %>
 <% end -%>
 <% unless @createfilesasync.nil? -%>
-  CreateFilesAsync "<%= @createfilesasync %>"
+  CreateFilesAsync <%= @createfilesasync %>
 <% end -%>
 <% if @stepsize -%>
   StepSize "<%= @stepsize %>"
@@ -21,5 +21,8 @@
 <% end -%>
 <% if @xff -%>
   XFF "<%= @xff %>"
+<% end -%>
+<% unless @collectstatistics.nil? -%>
+  CollectStatistics "<%= @collectstatistics %>"
 <% end -%>
 </Plugin>

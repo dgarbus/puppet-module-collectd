@@ -1,14 +1,16 @@
 #
 define collectd::plugin::mysql::database (
-  $ensure      = 'present',
-  $database    = $name,
-  $host        = 'UNSET',
-  $username    = 'UNSET',
-  $password    = 'UNSET',
-  $port        = '3306',
-  $masterstats = false,
-  $slavestats  = false,
-  $socket      = undef,
+  $ensure             = 'present',
+  $database           = $name,
+  $host               = 'UNSET',
+  $username           = 'UNSET',
+  $password           = 'UNSET',
+  $port               = '3306',
+  $masterstats        = false,
+  $slavestats         = false,
+  $socket             = undef,
+  $innodbstats        = undef,
+  $slavenotifications = undef,
 ) {
   include collectd::params
   include collectd::plugin::mysql
@@ -21,14 +23,18 @@ define collectd::plugin::mysql::database (
     validate_string($socket)
   }
 
-  if ($masterstats == true and $slavestats == true) {
-    fail('master and slave statistics are mutually exclusive.')
+  if $innodbstats != undef {
+    validate_bool($innodbstats)
+  }
+
+  if $slavenotifications != undef {
+    validate_bool($slavenotifications)
   }
 
   file { "${name}.conf":
     ensure  => $ensure,
     path    => "${conf_dir}/mysql-${name}.conf",
-    mode    => '0644',
+    mode    => '0640',
     owner   => 'root',
     group   => $collectd::params::root_group,
     content => template('collectd/mysql-database.conf.erb'),

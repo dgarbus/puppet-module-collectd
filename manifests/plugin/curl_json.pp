@@ -3,6 +3,7 @@ define collectd::plugin::curl_json (
   $url,
   $instance,
   $keys,
+  $ensure   = present,
   $user     = undef,
   $password = undef,
   $order = '10',
@@ -10,6 +11,10 @@ define collectd::plugin::curl_json (
 
   include collectd::params
   validate_hash($keys)
+
+  if $::osfamily == 'Redhat' {
+    ensure_packages('collectd-curl_json')
+  }
 
   $conf_dir = $collectd::params::plugin_conf_dir
 

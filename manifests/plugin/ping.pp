@@ -1,6 +1,8 @@
 # See http://collectd.org/documentation/manpages/collectd.conf.5.shtml#plugin_ping
-define collectd::plugin::ping (
+class collectd::plugin::ping (
   $hosts,
+  $ensure         = present,
+  $manage_package = $collectd::manage_package,
   $interval       = undef,
   $timeout        = undef,
   $ttl            = undef,
@@ -12,15 +14,17 @@ define collectd::plugin::ping (
 
   validate_array($hosts)
 
-  $conf_dir = $collectd::params::plugin_conf_dir
+  if $::osfamily == 'Redhat' {
+    if $manage_package {
+      package { 'collectd-ping':
+        ensure => $ensure,
+      }
+    }
+  }
 
-  file {
-    "${name}.load":
-      path    => "${conf_dir}/ping-${name}.conf",
-      owner   => 'root',
-      group   => $collectd::params::root_group,
-      mode    => '0644',
-      content => template('collectd/ping.conf.erb'),
-      notify  => Service['collectd'],
+  collectd::plugin { 'ping':
+    ensure   => $ensure,
+    interval => $interval,
+    content  => template('collectd/plugin/ping.conf.erb'),
   }
 }

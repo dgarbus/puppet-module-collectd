@@ -3,9 +3,20 @@
 <% @data.sort_by {|k,v| k}.each do |key,val| -%>
   <Data "<%=key %>">
     Type "<%= val['Type'] %>"
+<% if val['Table'] -%>
     Table <%= val['Table'] %>
+<% end -%>
     Instance "<%= val['Instance'] %>"
-    Values <% val['Values'].sort.each do |x| -%>"<%= x %>" <% end %>
+<% if val['InstancePrefix'] -%>
+    InstancePrefix "<%= val['InstancePrefix'] %>"
+<% end -%>
+    Values <% Array(val['Values']).each do |x| -%>"<%= x %>" <% end %>
+<% if val['Scale'] -%>
+    Scale <%= val['Scale'] %>
+<% end -%>
+<% if val['Shift'] -%>
+    Shift <%= val['Shift'] %>
+<% end -%>
   </Data>
 <% end -%>
 <% @hosts.sort_by {|k,v| k}.each do |key,val| -%>
@@ -13,7 +24,7 @@
     Address "<%= val['Address'] %>"
     Version <%= val['Version'] %>
     Community "<%= val['Community'] %>"
-    Collect <% val['Collect'].sort.each do |x| -%>"<%= x -%>" <% end %>
+    Collect <% Array(val['Collect']).sort.each do |x| -%>"<%= x -%>" <% end %>
     Interval <%= val['Interval'] %>
   </Host>
 <% end -%>

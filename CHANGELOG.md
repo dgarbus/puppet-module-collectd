@@ -1,3 +1,141 @@
+## 2015-09-03 Release 4.2.0
+
+### New features
+
+* Add support for types.db
+* Add plugin::netlink
+* Add collectd::plugin::ceph
+* Add support for the new AllPortsSummary option
+* plugin/mysql: Add innodbstats and slavenotifications
+* plugin/snmp: Remove sorting of Values option in data block
+* plugin/snmp: Support InstancePrefix, Scale and Shift options
+* plugin/logfile:  Add support for PrintSeverity option (fix #317)
+* plugin/exec: Exec plugin can also be used with a parameterized class.
+
+### Bug fixes
+
+* plugin/snmp: Check if Table option is defined
+
+## 2015-08-05 Release 4.1.2
+
+Fix .travis.yml so that deploys work, better
+
+## 2015-08-05 Release 4.1.1
+
+Fix .travis.yml so that deploys work
+
+## 2015-08-05 Release 4.1.0
+
+This module now lives on the puppet community github organization.
+
+### New features
+
+* Add option to not install collectd-iptables on centos 6
+* Allow iptables chains parameter to be an array
+* Support UdevNameAttr attribute on disk plugin (fixes #300)
+
+## 2015-07-26 Release 4.0.0
+
+### Backwards-incompatible changes:
+
+* Exec plugin was renamed from collectd::plugin::exec to collectd::plugin::exec::cmd to support multiple execs
+* Write_graphite was renamed from collectd::plugin::write_graphite to collectd::plugin::write_graphite::carbon to supports multiple carbon backends
+
+### New features
+
+* Support for the aggregation, chain, and protocols plugins
+* Swap and Memory plugins now support ValuesAbsolute and ValuesPercentage
+* OpenVPN plugin now supports multiple statusfiles
+
+### Bug fixes
+
+* Fixed bug preventing multiple instances of curl_json
+* Fixed write_http plugin on RedHat
+
+## 2015-06-16 Release 3.4.0
+
+### Backwards-incompatible changes:
+
+* Implement support for mupltiple Python modules
+
+### Bug fixes
+
+* snmp/host.pp validate_re validate on string
+* quote reserved word type in tail.pp
+
+### New features
+
+* add new cpu plugin options introduced in collectd 5.5
+* Added absent timers for statsd module.
+
+### Testing enhancements
+
+* Add ruby 2.2.0 to TravisCI
+* Add puppet4 to .travis and update ruby to 2.1.6
+* Add metadata-json-lint gem
+
+## 2015-04-22 Release 3.3.0
+
+### Backwards-incompatible changes:
+
+* Drop Ruby 1.8.7 support
+* Package collectd-python is no longer available in EPEL
+
+### Features:
+
+* Allow disable forwarding in network::server
+
+### Bugs/Maint:
+
+* Fix permission on MySQL plugin file
+* Only set LogSendErrors option if collectd version >= 5.4.
+* CreateFiles/CreateFilesAsync expect boolean values
+
+## 2015-01-24 Release 3.2.0
+
+### Backwards-incompatible changes:
+
+There are no known backwards compat changes, please add them to the
+CHANGELOG if you find one.
+
+### Summary:
+
+The release adds support for 4 new plugins and adds redhat package
+support to a large number of plugins.
+
+### New Plugins:
+
+* collectd::plugin::genericjmx
+* collectd::plugin::java
+* collectd::plugin::target_v5upgrade
+* collectd::plugin::lvm
+
+### Features:
+
+* plugin/rrdcached: Add CollectStatistics option
+* plugin/ntpd: Add IncludeUnitID option
+
+### Bugs/Maint:
+
+* Update metadata for more PE versions
+* plugin/perl: changed exec in provider 'false' case
+* plugin/varnish: package resouce ensure param passed
+* plugin/postgresql: add package for redhat systems
+* plugin/write_riemann: add package for redhat systems
+* plugin/write_http: add package for redhat systems
+* plugin/snmp: add package for redhat systems
+* plugin/sensors: add package for redhat systems
+* plugin/python: add package for redhat systems
+* plugin/ping: add package for redhat systems
+* plugin/perl: add package for redhat systems
+* plugin/nginx: add package for redhat systems
+* plugin/mysql: add package for redhat systems
+* plugin/iptables: add package for redhat systems
+* plugin/curl_json: add package for redhat systems
+* plugin/curl: add package for redhat systems
+* plugin/amqp: add package for redhat systems
+* plugin/bind: add package for redhat systems
+
 ## 2014-12-26 Release 3.1.0
 
 ### Backwards-incompatible changes:

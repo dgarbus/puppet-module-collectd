@@ -42,7 +42,6 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "10.04",
         "12.04",
         "14.04"
       ]
@@ -63,25 +62,26 @@
   "requirements": [
     {
       "name": "pe",
-      "version_requirement": "3.2.x"
+      "version_requirement": ">= 3.2.0"
     },
     {
       "name": "puppet",
-      "version_requirement": "3.x"
+      "version_requirement": ">= 3.2.0"
     }
   ],
-  "name": "pdxcat-collectd",
-  "version": "3.1.0",
-  "source": "https://github.com/pdxcat/puppet-module-collectd",
-  "author": "Computer Action Team",
-  "license": "Apache Version 2.0",
+  "name": "puppet-collectd",
+  "version": "4.2.0",
+  "source": "https://github.com/puppet-community/puppet-collectd",
+  "author": "puppetcommunity",
+  "license": "Apache-2.0",
   "summary": "Puppet module for Collectd",
-  "description": "Manages collectd configuration and service",
-  "project_page": "https://github.com/pdxcat/puppet-module-collectd",
+  "project_page": "https://github.com/puppet-community/puppet-collectd",
+  "issues_url": "https://github.com/puppet-community/puppet-collectd/issues",
+  "tags": ["collectd", "puppet-community"],
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 3.0.0"
+      "version_requirement": ">= 3.2.0"
     },
     {
       "name": "puppetlabs/concat",
